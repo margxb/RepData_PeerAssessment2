@@ -4,14 +4,27 @@ output:
   pdf_document: default
   html_document: default
 ---
+# Effects of NOAA Events (1950 - 2011) on Populations Health and Economic Impact
 
+## Synopsis
+### Enter in up to 10 sentenses here
+
+## Data Processing
 ```{r echo = TRUE}
 library(ggplot2)
 library(patchwork)
 library(knitr)
 
 weather <- read.csv("repdata_data_StormData.csv.bz2")
+unique(weather$EVTYPE)
+```
+
+```{r echo=TRUE}
 weather['EVTYPE'] <- toupper(weather$EVTYPE)
+unique(weather$EVTYPE)
+```
+
+```{r echo=TRUE}
 weather <- weather[!grepl("SUMMARY", weather$EVTYPE),]
 weather$EVTYPE[grepl("LAKE", weather$EVTYPE) & grepl("FLOO", weather$EVTYPE)] = "LAKESHORE FLOOD"
 weather$EVTYPE[grepl("COAST|TID|CSTL|COASTAL", weather$EVTYPE) & grepl("FLOO", weather$EVTYPE)] = "COASTAL FLOOD"
@@ -68,25 +81,27 @@ weather$EVTYPE[grepl("WARM|HOT|HEAT", weather$EVTYPE)] = 'EXCESSIVE HEAT'
 ```
 
 ```{r echo = TRUE}
-weather_avg_deaths <- aggregate(weather$FATALITIES, by = list(EVTYPE = weather$EVTYPE), FUN = mean, na.rm = TRUE)
-weather_avg_deaths<- weather_avg_deaths[order(-weather_avg_deaths$x),]
+unique(weather$EVTYPE)
+```
+
+```{r echo = TRUE}
 weather_sum_deaths <- aggregate(weather$FATALITIES, by = list(EVTYPE = weather$EVTYPE), FUN = sum, na.rm = TRUE)
 weather_sum_deaths<- weather_sum_deaths[order(-weather_sum_deaths$x),]
-weather_avg_dmg <- aggregate(weather$PROPDMG, by = list(EVTYPE = weather$EVTYPE), FUN = mean, na.rm = TRUE)
-weather_avg_dmg<- weather_avg_dmg[order(-weather_avg_dmg$x),]
+head(weather_sum_deaths)
+
 weather_sum_dmg <- aggregate(weather$PROPDMG, by = list(EVTYPE = weather$EVTYPE), FUN = sum, na.rm = TRUE)
 weather_sum_dmg<- weather_sum_dmg[order(-weather_sum_dmg$x),]
-weather_avg_inj <- aggregate(weather$INJURIES, by = list(EVTYPE = weather$EVTYPE), FUN = mean, na.rm = TRUE)
-weather_avg_inj<- weather_avg_inj[order(-weather_avg_inj$x),]
+head(weather_sum_dmg)
+
 weather_sum_inj <- aggregate(weather$INJURIES, by = list(EVTYPE = weather$EVTYPE), FUN = sum, na.rm = TRUE)
 weather_sum_inj<- weather_sum_inj[order(-weather_sum_inj$x),]
-weather_sum_deaths <- head(weather_sum_deaths, 5)
-weather_avg_deaths <- head(weather_avg_deaths, 5)
-weather_sum_dmg <- head(weather_sum_dmg, 5)
-weather_avg_dmg <- head(weather_avg_dmg, 5)
-weather_sum_inj <- head(weather_sum_inj, 5)
-weather_avg_inj <- head(weather_avg_inj, 5)
+head(weather_sum_inj)
 
+weather_sum_deaths <- head(weather_sum_deaths, 10)
+
+weather_sum_dmg <- head(weather_sum_dmg, 10)
+
+weather_sum_inj <- head(weather_sum_inj, 10)
 ```
 
 ```{r echo=TRUE}
@@ -97,19 +112,24 @@ df_max_deaths <- weather[weather$EVTYPE %in% max_death_events,]
 df_max_inj <- weather[weather$EVTYPE %in% max_inj_events,]
 df_max_dmg <- weather[weather$EVTYPE %in% max_dmg_events,]
 ```
-
+# Results
 ```{r echo=TRUE}
 p1 <- qplot(df_max_dmg$EVTYPE, df_max_dmg$PROPDMG, geom = "boxplot", main = "Top 5 Events with the Most Property Damage") + coord_flip() + xlab("Event Type") + ylab("Property Damage")
 
-```
-```{r echo=TRUE}
-p2 <- qplot(df_max_inj$EVTYPE, df_max_inj$INJURIES, geom = "boxplot", main = "Top 5 Types of Events with the Most Injuries") + coord_flip() + xlab("Event Type") + ylab("Number of Injuries per Recorded Event")
-```
 
-```{r echo=TRUE}
+p2 <- qplot(df_max_inj$EVTYPE, df_max_inj$INJURIES, geom = "boxplot", main = "Top 5 Types of Events with the Most Injuries") + coord_flip() + xlab("Event Type") + ylab("Number of Injuries per Recorded Event")
+
 p3 <- qplot(df_max_deaths$EVTYPE, df_max_deaths$FATALITIES, geom = "boxplot",  main = "Top 5 Types of Events with the Most Deaths") + coord_flip() + xlab("Event Type") + ylab("Number of Deaths per Recorded Event")
 ```
 
 ```{r echo = TRUE}
-p1 + p2 + p3 + plot_layout(ncol = 1)
+p3 + p2 + p1 + plot_layout(ncol = 1)
+```
+
+```{r echo=TRUE}
+p4 <- qplot(weather_sum_deaths$EVTYPE, weather_sum_deaths$x, main = "Sum of Fatalities for Top 5 Events") + geom_point() + xlab("Event Type") + ylab("Number of Deaths") +coord_flip()
+p5 <- qplot(weather_sum_inj$EVTYPE, weather_sum_inj$x, main = "Sum of Injuries for Top 5 Events") + geom_point() + xlab("Event Type") + ylab("Number of Injuries") +coord_flip()
+p6 <- qplot(weather_sum_dmg$EVTYPE, weather_sum_dmg$x, main = "Sum of Damages for Top 5 Events") + geom_point() + xlab("Event Type") + ylab("Sum of Damages") + coord_flip()
+p4 + p5 + p6 + plot_layout(ncol = 1)
+
 ```
