@@ -7,25 +7,34 @@ output:
 # Effects of NOAA Events (1950 - 2011) on Populations Health and Economic Impact
 
 ## Synopsis
-### Enter in up to 10 sentenses here
+### Every year, many different types of weather occur with varying effect on health of the population and economic impact. It is the hope that an accurate account of these events over the course of decades can provide an insight into any trends and help with forecasting furthur impact. With a successful analysis of the data provided by NOAA (National Ocean and Atmospheric Administration), I hope to identify areas of strong impact to both health and the economy of the U.S. as a whole. This study will analyze the trends of events based on the total sums of fatalities, injuries and property damage over the 61 years of the data. For this analysis, the events with the top 10 sums for each category have been used.
 
 ## Data Processing
+### The data read in is pretty raw, and because of this requires some cleaning and simplifying to make it more useful for this analysis. 
 ```{r echo = TRUE}
 library(ggplot2)
 library(patchwork)
 library(knitr)
 
 weather <- read.csv("repdata_data_StormData.csv.bz2")
+```
+### The number of unique different types of recorded events for the raw data is 985. Many of the events are very similar to others, but vary in spelling slightly or were recorded in a slightly different manner.
+```{r echo=TRUE}
 unique(weather$EVTYPE)
 ```
 
+### The first step in simplifying the event list is to make the format consistent. In this case, I have converted all to upper case. This one change drops the unique values for event types to 897.
 ```{r echo=TRUE}
 weather['EVTYPE'] <- toupper(weather$EVTYPE)
 unique(weather$EVTYPE)
 ```
-
+### Further simplification can be done by dropping events containing SUMMARY in their name, as these don't have useful information and many of the columns are NA.
 ```{r echo=TRUE}
 weather <- weather[!grepl("SUMMARY", weather$EVTYPE),]
+unique(weather$EVTYPE)
+```
+### Many of the events are similar in names, as stated above. The code below is matching strings and renaming events ensure consistency for event types. 
+```{r echo=TRUE}
 weather$EVTYPE[grepl("LAKE", weather$EVTYPE) & grepl("FLOO", weather$EVTYPE)] = "LAKESHORE FLOOD"
 weather$EVTYPE[grepl("COAST|TID|CSTL|COASTAL", weather$EVTYPE) & grepl("FLOO", weather$EVTYPE)] = "COASTAL FLOOD"
 weather$EVTYPE[grepl("FLASH", weather$EVTYPE) & grepl("FLOO", weather$EVTYPE)] = "FLASH FLOOD"
@@ -79,23 +88,39 @@ weather$EVTYPE[grepl("THUNDER", weather$EVTYPE) & !grepl("WIND|SEVERE", weather$
 weather$EVTYPE[grepl("SLIDE", weather$EVTYPE)] = 'MUDSLIDE/LANDSLIDE/ROCKSLIDE'
 weather$EVTYPE[grepl("WARM|HOT|HEAT", weather$EVTYPE)] = 'EXCESSIVE HEAT'
 ```
-
+### Following the above processing, there are now only 134 event types. This could perhaps be simplified further, depending on how one decided to handle the types of events.
 ```{r echo = TRUE}
 unique(weather$EVTYPE)
 ```
-
+### Now that the EVTYPE variable has been properly named, the data can be sorted by type of event. The below code aggregates the fatalities, injuries, and property damage for each type of recorded event and calculates the sum for each.
 ```{r echo = TRUE}
 weather_sum_deaths <- aggregate(weather$FATALITIES, by = list(EVTYPE = weather$EVTYPE), FUN = sum, na.rm = TRUE)
 weather_sum_deaths<- weather_sum_deaths[order(-weather_sum_deaths$x),]
+```
+#### Events with Most Deaths (1950 - 2011)
+```{r echo=TRUE}
 head(weather_sum_deaths)
+```
 
+```{r echo=TRUE}
 weather_sum_dmg <- aggregate(weather$PROPDMG, by = list(EVTYPE = weather$EVTYPE), FUN = sum, na.rm = TRUE)
 weather_sum_dmg<- weather_sum_dmg[order(-weather_sum_dmg$x),]
+```
+#### Events with Most Property Damage (1950 - 2011)
+```{r echo=TRUE}
 head(weather_sum_dmg)
+```
 
+```{r echo=TRUE}
 weather_sum_inj <- aggregate(weather$INJURIES, by = list(EVTYPE = weather$EVTYPE), FUN = sum, na.rm = TRUE)
 weather_sum_inj<- weather_sum_inj[order(-weather_sum_inj$x),]
+```
+#### Events with Most Injuries (1950 - 2011)
+```{r echo=TRUE}
 head(weather_sum_inj)
+```
+### Here the top 10 values for deaths, damage and injuries have been stored for later use.
+```{r echo=TRUE}
 
 weather_sum_deaths <- head(weather_sum_deaths, 10)
 
@@ -112,24 +137,32 @@ df_max_deaths <- weather[weather$EVTYPE %in% max_death_events,]
 df_max_inj <- weather[weather$EVTYPE %in% max_inj_events,]
 df_max_dmg <- weather[weather$EVTYPE %in% max_dmg_events,]
 ```
-# Results
+## Results
 ```{r echo=TRUE}
-p1 <- qplot(df_max_dmg$EVTYPE, df_max_dmg$PROPDMG, geom = "boxplot", main = "Top 5 Events with the Most Property Damage") + coord_flip() + xlab("Event Type") + ylab("Property Damage")
+p1 <- qplot(df_max_dmg$EVTYPE, df_max_dmg$PROPDMG, geom = "boxplot", main = "Top 10 Events with the Most Property Damage") + coord_flip() + xlab("Event Type") + ylab("Property Damage")
 
 
-p2 <- qplot(df_max_inj$EVTYPE, df_max_inj$INJURIES, geom = "boxplot", main = "Top 5 Types of Events with the Most Injuries") + coord_flip() + xlab("Event Type") + ylab("Number of Injuries per Recorded Event")
+p2 <- qplot(df_max_inj$EVTYPE, df_max_inj$INJURIES, geom = "boxplot", main = "Top 10 Types of Events with the Most Injuries") + coord_flip() + xlab("Event Type") + ylab("Number of Injuries per Recorded Event")
 
-p3 <- qplot(df_max_deaths$EVTYPE, df_max_deaths$FATALITIES, geom = "boxplot",  main = "Top 5 Types of Events with the Most Deaths") + coord_flip() + xlab("Event Type") + ylab("Number of Deaths per Recorded Event")
+p3 <- qplot(df_max_deaths$EVTYPE, df_max_deaths$FATALITIES, geom = "boxplot",  main = "Top 10 Types of Events with the Most Deaths") + coord_flip() + xlab("Event Type") + ylab("Number of Deaths per Recorded Event")
 ```
-
+### The below figure contains 3 plots showing boxplots for the 10 events that have the largest total overall impact on fatalities, injuries and property damage, showing the range of impact for each type of event.
 ```{r echo = TRUE}
 p3 + p2 + p1 + plot_layout(ncol = 1)
 ```
 
 ```{r echo=TRUE}
-p4 <- qplot(weather_sum_deaths$EVTYPE, weather_sum_deaths$x, main = "Sum of Fatalities for Top 5 Events") + geom_point() + xlab("Event Type") + ylab("Number of Deaths") +coord_flip()
-p5 <- qplot(weather_sum_inj$EVTYPE, weather_sum_inj$x, main = "Sum of Injuries for Top 5 Events") + geom_point() + xlab("Event Type") + ylab("Number of Injuries") +coord_flip()
-p6 <- qplot(weather_sum_dmg$EVTYPE, weather_sum_dmg$x, main = "Sum of Damages for Top 5 Events") + geom_point() + xlab("Event Type") + ylab("Sum of Damages") + coord_flip()
+p4 <- qplot(weather_sum_deaths$EVTYPE, weather_sum_deaths$x, main = "Sum of Fatalities for Top 10 Events") + geom_point() + xlab("Event Type") + ylab("Number of Deaths") +coord_flip()
+p5 <- qplot(weather_sum_inj$EVTYPE, weather_sum_inj$x, main = "Sum of Injuries for Top 10 Events") + geom_point() + xlab("Event Type") + ylab("Number of Injuries") +coord_flip()
+p6 <- qplot(weather_sum_dmg$EVTYPE, weather_sum_dmg$x, main = "Sum of Damages for Top 10 Events") + geom_point() + xlab("Event Type") + ylab("Sum of Damages") + coord_flip()
+```
+### The below figure contains 3 plots for the 10 events that have the largest total overall impact on fatalities, injuries and property damage.
+```{r echo=TRUE}
 p4 + p5 + p6 + plot_layout(ncol = 1)
 
 ```
+### Over the course of the data (1950 - 2011) the plots indicate that as a whole, tornados and excessive head have the largest impact on fatalities across the US.
+
+### Similarly, tornados by far outnumber any other type of events for the number of injuries related to weather, followed distantly by excessive head and thunderstorm winds.
+
+### Across the US the most economic consequence arise from tornados and thunderstorm winds. 
