@@ -1,0 +1,239 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Weather Event Analysis},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Weather Event Analysis}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(patchwork)}
+
+\NormalTok{weather }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"repdata\_data\_StormData.csv.bz2"}\NormalTok{)}
+\NormalTok{weather[}\StringTok{\textquotesingle{}EVTYPE\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{toupper}\NormalTok{(weather}\SpecialCharTok{$}\NormalTok{EVTYPE)}
+\NormalTok{weather }\OtherTok{\textless{}{-}}\NormalTok{ weather[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"SUMMARY"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE),]}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"LAKE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"FLOO"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"LAKESHORE FLOOD"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"COAST|TID|CSTL|COASTAL"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"FLOO"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"COASTAL FLOOD"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"FLASH"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"FLOO"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"FLASH FLOOD"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"COASTAL|LAKESHORE|FLASH"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"FLOOD|FLD"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"FLOOD"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"MARINE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"TSTM|THUNDERSTORM|THU|TUN"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"WIN"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"THUNDERSTORM WIND"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"MARINE|THUNDERSTORM|HIGH"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"STRONG|STORM|ADVISORY"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"WIN"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"STRONG WIND"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"MARINE|THUNDERSTORM|HIGH"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"STRONG|STORM|ADVISORY|GUSTY|CHILL|GRADIENT"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"WIN|WND"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"WIND"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"GUST"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"WIN"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"GUSTY WIND"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"GRADIENT"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"WIN"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"GRADIENT WIND"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"MARINE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"HIGH"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"WIND"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"HIGH WIND"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"MARINE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"STRONG"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"WIND"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"STRONG WIND"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"EXTREME"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"CHILL|COLD"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"COLD/WIND CHILL"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"EXTREME|RECORD|EXCESSIVE|UNUSUALLY|UNSEASONAB|PROLONG|EXTENDED"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"CHI|COLD"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}EXTREME COLD/WIND CHILL\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"WATERSPOUT|WATER SPOUT|SPOUT"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"WATERSPOUT"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"DROUGHT|RECORD LOW RAINFALL|DRIEST MONTH|ABNORMALLY DRY|DRYNESS|DRY"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"DROUGHT"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"TORNADO|TORN"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"TORNADO"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"ICE|COLD"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"FOG"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"FREEZING FOG"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"DENSE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"FOG"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"DENSE FOG"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"MARINE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"HAIL"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"HAIL"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"DUST"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"DEVEL"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"DUST DEVIL"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"DUSTSTORM|BLOWING DUST|SAHARAN DUST"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"DUST STORM"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"WAVE|BURST"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"HEAT"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"HEAT"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"RECORD|EXTREME|UNSEASON|ABNORMAL|UNUSUAL"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"HEAT|WARM|HOT|TEMPERATURE|HIGH"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"EXCESSIVE HEAT"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"FROST|FREEZE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"FROST/FREEZE"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"UNSEASON|RECORD|LOW"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"COOL|LOW|TEMPERATURE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"COLD/WIND CHILL"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"FUNNEL"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"FUNNEL CLOUD"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"FREEZING|SNOW|LOW"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"HEAVY|RECORD|EXCESSIVE|TORRENTIAL|HVY|PROLONGED|ABNORMALLY|EXTREMELY|UNSEASONAB"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"RAIN|PRECIPITATION|WET"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}HEAVY RAIN\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"FREEZING|SNOW|LOW"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"HEAVY|RECORD|EXCESSIVE|TORRENTIAL"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"RAIN|PRECIPITATION|WET"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}RAIN\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"RAIN|SLEET|STORM|LAKE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"ADVISORY|EXCESSIVE|RECORD|HEAVY"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"SNOW"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"HEAVY SNOW"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"LAKE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"ADVISORY|EXCESSIVE|RECORD|HEAVY"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"SNOW"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{"SNOW"}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"LAKE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"SNOW"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}LAKE{-}EFFECT SNOW\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"FREEZING"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \FunctionTok{grepl}\NormalTok{(}\StringTok{"RAIN|DRIZZLE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}SLEET\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"SLEET"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}SLEET\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"SURF"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}HIGH SURF\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"TYPHOON|HURRICANE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}HURRICANE (TYPHOON)\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"ICE STORM"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}ICE STORM\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"WINTER STORM"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}WINTER STORM\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"LIGHTNING"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}LIGHTNING\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"MARINE MISHAP"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}MARINE ACCIDENT\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"MARINE TSTM WIND"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}MARINE THUNDERSTORM WIND\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"RIP CURRENT"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}RIP CURRENT\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"STORM SURGE|BLOW{-}OUT TIDE|COASTAL SURGE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}STORM SURGE/TIDE\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"TROPICAL STORM"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}TROPICAL STORM\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"VOLCANIC ASH"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}VOLCANIC ASH\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"FIRE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}WILDFIRE\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"WINTER WEATHER"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}WINTER WEATHER\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"WINTER STORM|WINTERY MIX|WINTER MIX"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}WINTER STORM\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"MICROBURST|MICOBURST"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}MICROBURST\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"BLIZZARD"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}BLIZZARD\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"THUNDER"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"WIND|SEVERE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}THUNDERSTORM\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"SLIDE"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}MUDSLIDE/LANDSLIDE/ROCKSLIDE\textquotesingle{}}
+\NormalTok{weather}\SpecialCharTok{$}\NormalTok{EVTYPE[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"WARM|HOT|HEAT"}\NormalTok{, weather}\SpecialCharTok{$}\NormalTok{EVTYPE)] }\OtherTok{=} \StringTok{\textquotesingle{}EXCESSIVE HEAT\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weather\_avg\_deaths }\OtherTok{\textless{}{-}} \FunctionTok{aggregate}\NormalTok{(weather}\SpecialCharTok{$}\NormalTok{FATALITIES, }\AttributeTok{by =} \FunctionTok{list}\NormalTok{(}\AttributeTok{EVTYPE =}\NormalTok{ weather}\SpecialCharTok{$}\NormalTok{EVTYPE), }\AttributeTok{FUN =}\NormalTok{ mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{weather\_avg\_deaths}\OtherTok{\textless{}{-}}\NormalTok{ weather\_avg\_deaths[}\FunctionTok{order}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{weather\_avg\_deaths}\SpecialCharTok{$}\NormalTok{x),]}
+\NormalTok{weather\_sum\_deaths }\OtherTok{\textless{}{-}} \FunctionTok{aggregate}\NormalTok{(weather}\SpecialCharTok{$}\NormalTok{FATALITIES, }\AttributeTok{by =} \FunctionTok{list}\NormalTok{(}\AttributeTok{EVTYPE =}\NormalTok{ weather}\SpecialCharTok{$}\NormalTok{EVTYPE), }\AttributeTok{FUN =}\NormalTok{ sum, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{weather\_sum\_deaths}\OtherTok{\textless{}{-}}\NormalTok{ weather\_sum\_deaths[}\FunctionTok{order}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{weather\_sum\_deaths}\SpecialCharTok{$}\NormalTok{x),]}
+\NormalTok{weather\_avg\_dmg }\OtherTok{\textless{}{-}} \FunctionTok{aggregate}\NormalTok{(weather}\SpecialCharTok{$}\NormalTok{PROPDMG, }\AttributeTok{by =} \FunctionTok{list}\NormalTok{(}\AttributeTok{EVTYPE =}\NormalTok{ weather}\SpecialCharTok{$}\NormalTok{EVTYPE), }\AttributeTok{FUN =}\NormalTok{ mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{weather\_avg\_dmg}\OtherTok{\textless{}{-}}\NormalTok{ weather\_avg\_dmg[}\FunctionTok{order}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{weather\_avg\_dmg}\SpecialCharTok{$}\NormalTok{x),]}
+\NormalTok{weather\_sum\_dmg }\OtherTok{\textless{}{-}} \FunctionTok{aggregate}\NormalTok{(weather}\SpecialCharTok{$}\NormalTok{PROPDMG, }\AttributeTok{by =} \FunctionTok{list}\NormalTok{(}\AttributeTok{EVTYPE =}\NormalTok{ weather}\SpecialCharTok{$}\NormalTok{EVTYPE), }\AttributeTok{FUN =}\NormalTok{ sum, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{weather\_sum\_dmg}\OtherTok{\textless{}{-}}\NormalTok{ weather\_sum\_dmg[}\FunctionTok{order}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{weather\_sum\_dmg}\SpecialCharTok{$}\NormalTok{x),]}
+\NormalTok{weather\_avg\_inj }\OtherTok{\textless{}{-}} \FunctionTok{aggregate}\NormalTok{(weather}\SpecialCharTok{$}\NormalTok{INJURIES, }\AttributeTok{by =} \FunctionTok{list}\NormalTok{(}\AttributeTok{EVTYPE =}\NormalTok{ weather}\SpecialCharTok{$}\NormalTok{EVTYPE), }\AttributeTok{FUN =}\NormalTok{ mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{weather\_avg\_inj}\OtherTok{\textless{}{-}}\NormalTok{ weather\_avg\_inj[}\FunctionTok{order}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{weather\_avg\_inj}\SpecialCharTok{$}\NormalTok{x),]}
+\NormalTok{weather\_sum\_inj }\OtherTok{\textless{}{-}} \FunctionTok{aggregate}\NormalTok{(weather}\SpecialCharTok{$}\NormalTok{INJURIES, }\AttributeTok{by =} \FunctionTok{list}\NormalTok{(}\AttributeTok{EVTYPE =}\NormalTok{ weather}\SpecialCharTok{$}\NormalTok{EVTYPE), }\AttributeTok{FUN =}\NormalTok{ sum, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{weather\_sum\_inj}\OtherTok{\textless{}{-}}\NormalTok{ weather\_sum\_inj[}\FunctionTok{order}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{weather\_sum\_inj}\SpecialCharTok{$}\NormalTok{x),]}
+\NormalTok{weather\_sum\_deaths }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(weather\_sum\_deaths, }\DecValTok{5}\NormalTok{)}
+\NormalTok{weather\_avg\_deaths }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(weather\_avg\_deaths, }\DecValTok{5}\NormalTok{)}
+\NormalTok{weather\_sum\_dmg }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(weather\_sum\_dmg, }\DecValTok{5}\NormalTok{)}
+\NormalTok{weather\_avg\_dmg }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(weather\_avg\_dmg, }\DecValTok{5}\NormalTok{)}
+\NormalTok{weather\_sum\_inj }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(weather\_sum\_inj, }\DecValTok{5}\NormalTok{)}
+\NormalTok{weather\_avg\_inj }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(weather\_avg\_inj, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{max\_death\_events }\OtherTok{\textless{}{-}}\NormalTok{ weather\_sum\_deaths}\SpecialCharTok{$}\NormalTok{EVTYPE}
+\NormalTok{max\_inj\_events }\OtherTok{\textless{}{-}}\NormalTok{ weather\_sum\_inj}\SpecialCharTok{$}\NormalTok{EVTYPE}
+\NormalTok{max\_dmg\_events }\OtherTok{\textless{}{-}}\NormalTok{ weather\_sum\_dmg}\SpecialCharTok{$}\NormalTok{EVTYPE}
+\NormalTok{df\_max\_deaths }\OtherTok{\textless{}{-}}\NormalTok{ weather[weather}\SpecialCharTok{$}\NormalTok{EVTYPE }\SpecialCharTok{\%in\%}\NormalTok{ max\_death\_events,]}
+\NormalTok{df\_max\_inj }\OtherTok{\textless{}{-}}\NormalTok{ weather[weather}\SpecialCharTok{$}\NormalTok{EVTYPE }\SpecialCharTok{\%in\%}\NormalTok{ max\_inj\_events,]}
+\NormalTok{df\_max\_dmg }\OtherTok{\textless{}{-}}\NormalTok{ weather[weather}\SpecialCharTok{$}\NormalTok{EVTYPE }\SpecialCharTok{\%in\%}\NormalTok{ max\_dmg\_events,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{qplot}\NormalTok{(df\_max\_dmg}\SpecialCharTok{$}\NormalTok{EVTYPE, df\_max\_dmg}\SpecialCharTok{$}\NormalTok{PROPDMG, }\AttributeTok{geom =} \StringTok{"boxplot"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Top 5 Events with the Most Property Damage"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Event Type"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Property Damage"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{qplot}\NormalTok{(df\_max\_inj}\SpecialCharTok{$}\NormalTok{EVTYPE, df\_max\_inj}\SpecialCharTok{$}\NormalTok{INJURIES, }\AttributeTok{geom =} \StringTok{"boxplot"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Top 5 Types of Events with the Most Injuries"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Event Type"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Number of Injuries per Recorded Event"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p3 }\OtherTok{\textless{}{-}} \FunctionTok{qplot}\NormalTok{(df\_max\_deaths}\SpecialCharTok{$}\NormalTok{EVTYPE, df\_max\_deaths}\SpecialCharTok{$}\NormalTok{FATALITIES, }\AttributeTok{geom =} \StringTok{"boxplot"}\NormalTok{,  }\AttributeTok{main =} \StringTok{"Top 5 Types of Events with the Most Deaths"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Event Type"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Number of Deaths per Recorded Event"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p1 }\SpecialCharTok{+}\NormalTok{ p2 }\SpecialCharTok{+}\NormalTok{ p3 }\SpecialCharTok{+} \FunctionTok{plot\_layout}\NormalTok{(}\AttributeTok{ncol =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{figure/unnamed-chunk-67-1.png}
+\caption{plot of chunk unnamed-chunk-67}
+\end{figure}
+
+\end{document}
