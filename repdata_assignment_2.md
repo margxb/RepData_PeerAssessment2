@@ -9,6 +9,7 @@ output:
 ```r
 library(ggplot2)
 library(patchwork)
+library(knitr)
 
 weather <- read.csv("repdata_data_StormData.csv.bz2")
 weather['EVTYPE'] <- toupper(weather$EVTYPE)
@@ -118,4 +119,4 @@ p3 <- qplot(df_max_deaths$EVTYPE, df_max_deaths$FATALITIES, geom = "boxplot",  m
 p1 + p2 + p3 + plot_layout(ncol = 1)
 ```
 
-![plot of chunk unnamed-chunk-67](figure/unnamed-chunk-67-1.png)
+![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-25-1.png)
